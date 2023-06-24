@@ -1,0 +1,23 @@
+global function Riff_NoAAInit
+
+void function Riff_NoAAInit()
+{
+	#if SERVER
+	AddCallback_OnPlayerRespawned( BeginNoAA )
+    AddCallback_OnPilotBecomesTitan( BeginNoAATwo )
+    AddCallback_OnTitanBecomesPilot( BeginNoAATwo )
+	#endif
+}
+
+#if SERVER
+void function BeginNoAA( entity player )
+{
+	player.SetAimAssistAllowed( false )
+}
+
+void function BeginNoAATwo( entity player, entity titan )
+{
+	player.SetAimAssistAllowed( false )
+	titan.SetAimAssistAllowed( false )
+}
+#endif
